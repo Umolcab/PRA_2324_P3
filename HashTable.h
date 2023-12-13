@@ -44,12 +44,11 @@ class HashTable: public Dict<V>{
 		}
 
 		V operator[](std::string key){
-			TableEntry te = TableEntry(key);
-			return search(te);
+			return search(key);
 		}
 
 		void insert(std::string key, V value) override{
-			TableEntry te = TableEntry(key, value);
+			TableEntry<V> te = TableEntry<V>(key, value);
 			for(int i = 0; i < max; i++){
 				if(table[i].search(te)){
 					throw std::runtime_error("La clave ya está en el diccionario.");
@@ -60,7 +59,7 @@ class HashTable: public Dict<V>{
 		}
 
 		V search(std::string key) override{
-			TableEntry te = TableEntry(key);
+			TableEntry<V> te = TableEntry<V>(key);
 			for(int i = 0; i < max; i++){
 				if(int pos = table[i].search(te)){
 					return table[i].get(pos).value;
@@ -70,7 +69,7 @@ class HashTable: public Dict<V>{
 		}
 
 		V remove(std::string key) override{
-			TableEntry te = TableEntry(key);
+			TableEntry<V> te = TableEntry<V>(key);
 			for(int i = 0; i < max; i++){
 				if(int pos = table[i].search(te)){
 					table[i].remove(pos);
