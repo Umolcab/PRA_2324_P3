@@ -26,7 +26,7 @@ class HashTable: public Dict<V>{
 	public:
 		HashTable(int size){
 			max = size;
-			table = new ListLinked<V>[max];
+			table = new ListLinked<TableEntry<V>>[max];
 		       	n = 0;
 		}
 
@@ -44,7 +44,8 @@ class HashTable: public Dict<V>{
 		}
 
 		V operator[](std::string key){
-			return table[key];
+			TableEntry te = TableEntry(key);
+			return search(te);
 		}
 
 		void insert(std::string key, V value) override{
