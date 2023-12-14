@@ -6,7 +6,8 @@
 #include "Dict.h"
 #include "TableEntry.h"
 
-#include "../../P1/PRA_2324_P1/ListLinked.h"
+//#include "../../P1/PRA_2324_P1/ListLinked.h"
+#include "../../PRA_P1/PRA_2324_P1/ListLinked.h"
 
 template <typename V>
 
@@ -39,8 +40,13 @@ class HashTable: public Dict<V>{
 		}
 
 		friend std::ostream& operator<<(std::ostream &out, const HashTable<V> &th){
-			out << th.table << std::endl;
-		       	return out;
+			out << "HashTable [entries: " << th.n << ", capacity: " << th.max << "]" << std::endl;
+			for(int i = 0; i < th.max; i++){
+				out << "== Cubeta " << i << "==" << std::endl;
+				out << std::endl;
+				out << th.table[i] << std::endl; 
+			}
+			return out;
 		}
 
 		V operator[](std::string key){
