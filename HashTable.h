@@ -6,8 +6,8 @@
 #include "Dict.h"
 #include "TableEntry.h"
 
-//#include "../../P1/PRA_2324_P1/ListLinked.h"
-#include "../../PRA_P1/PRA_2324_P1/ListLinked.h"
+#include "../../P1/PRA_2324_P1/ListLinked.h"
+//#include "../../PRA_P1/PRA_2324_P1/ListLinked.h"
 
 template <typename V>
 
@@ -56,7 +56,7 @@ class HashTable: public Dict<V>{
 		void insert(std::string key, V value) override{
 			TableEntry<V> te = TableEntry<V>(key, value);
 			for(int i = 0; i < max; i++){
-				if(table[i].search(te)){
+				if(table[i].search(te) != -1){
 					throw std::runtime_error("La clave ya está en el diccionario.");
 				}
 			}
@@ -66,20 +66,24 @@ class HashTable: public Dict<V>{
 
 		V search(std::string key) override{
 			TableEntry<V> te = TableEntry<V>(key);
+			int pos;
 			for(int i = 0; i < max; i++){
-				if(int pos = table[i].search(te)){
+				pos = table[i].search(te);
+				if(pos != -1){
 					return table[i].get(pos).value;
 				}
 			}
-			throw std::runtime_error("La clave no se encuenra en el diccionario.");
+			throw std::runtime_error("La clave no se encuentra en el diccionario.");
 		}
 
 		V remove(std::string key) override{
 			TableEntry<V> te = TableEntry<V>(key);
+			int pos;
 			for(int i = 0; i < max; i++){
-				if(int pos = table[i].search(te)){
-					table[i].remove(pos);
+				pos = table[i].search(te);
+				if(pos != -1){
 					n--;
+					return table[i].remove(pos).value;
 				}
 			}
 			throw std::runtime_error("La clave no se encuentra en el diccionario.");

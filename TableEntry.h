@@ -23,7 +23,7 @@ class TableEntry {
 			return te1.key != te2.key;
 		}
 		friend std::ostream& operator<<(std::ostream &out, const TableEntry<V> &te){
-			out << "Key: " << te.key << " Value: " << te.value << std::endl;
+			out << "\nKey: " << te.key << " ,Value: " << te.value;
 			return out;
 		}
 };
