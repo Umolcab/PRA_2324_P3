@@ -18,7 +18,6 @@ class BSTreeDict: public Dict<V>{
 		}
 
 		~BSTreeDict(){
-			tree->~BSTree();
 			delete tree;
 		}
 
