@@ -23,7 +23,7 @@ class BSTreeDict: public Dict<V>{
 		}
 
 		friend std::ostream& operator<<(std::ostream &out, const BSTreeDict<V> &bs){
-			out << bs.tree;
+			out << *(bs.tree) << std::endl;
 			return out;
 		}
 
@@ -31,19 +31,22 @@ class BSTreeDict: public Dict<V>{
 			return tree->search(TableEntry<V>(key)).value;
 		}
 
-		void insert(std::string key, V value){
+		void insert(std::string key, V value) override{
 			tree->insert(TableEntry<V>(key, value));
 		}
 
-		V search(std::string key){
+		V search(std::string key) override{
 			return tree->search(TableEntry<V>(key)).value;
 		}
 
-		V remove(std::string key){
-			return tree->remove(TableEntry<V>(key)).value;
+		V remove(std::string key) override{
+			V value = tree->search(TableEntry<V>(key)).value;
+			tree->remove(TableEntry<V>(key));
+
+			return value;
 		}
 
-		int entries(){
+		int entries() override{
 			return tree->size();
 		}
 

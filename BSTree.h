@@ -10,7 +10,7 @@ class BSTree {
 	private:
 		int nelem;
 		BSNode<T> *root;
-		BSNode<T>* search(BSNode<T>* n, T e) const{
+		T search(BSNode<T>* n, T e) const{
 			if(n == nullptr){
 				throw std::runtime_error("Elemento no encontrado.");
 			}else if(n->elem < e){
@@ -18,7 +18,7 @@ class BSTree {
 			}else if(n->elem > e){
 				return search(n->left, e);
 			}else{
-				return n;
+				return n->elem;
 			}
 		}
 
@@ -102,7 +102,7 @@ class BSTree {
 		}
 
 		T search(T e) const{
-			return search(root, e)->elem;
+			return search(root, e);
 		}
 
 		T operator[](T e) const{
